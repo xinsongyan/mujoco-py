@@ -18,7 +18,7 @@ def main():
     # so N_SIMS=2 assumes there are 2 GPUs available.
     N_SIMS = 2
 
-    pool = MjRenderPool(load_model_from_path("xmls/tosser.xml"), device_ids=N_SIMS)
+    pool = MjRenderPool(load_model_from_path("../xmls/tosser.xml"), device_ids=N_SIMS)
 
     print("main(): start benchmarking", flush=True)
     start_t = perf_counter()

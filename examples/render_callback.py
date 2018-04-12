@@ -14,7 +14,7 @@ def render_callback(sim, viewer):
     for name in sim.model.geom_names:
         modder.rand_all(name)
 
-model = load_model_from_path("xmls/fetch/main.xml")
+model = load_model_from_path("../xmls/fetch/main.xml")
 sim = MjSim(model, render_callback=render_callback)
 
 viewer = MjViewer(sim)

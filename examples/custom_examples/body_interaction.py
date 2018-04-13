@@ -21,12 +21,12 @@ MODEL_XML = """
             <joint axis="0 1 0" damping="0.1" name="slide1" pos="0 0 0" type="slide"/>
             <joint axis="0 0 1" damping="1" name="slide2" pos="0 0 0" type="slide"/>
             <geom mass="1.0" pos="0 0 0" rgba="1 0 0 1" size="0.15" type="sphere"/>
-			<camera euler="0 0 0" fovy="40" name="rgb" pos="0 0 2.5"></camera>
+            <camera euler="0 0 0" fovy="40" name="rgb" pos="0 0 2.5"></camera>
         </body>
         <body mocap="true" name="mocap" pos="0.5 0.5 0.5">
-			<geom conaffinity="0" contype="0" pos="0 0 0" rgba="1.0 1.0 1.0 0.5" size="0.1 0.1 0.1" type="box"></geom>
-			<geom conaffinity="0" contype="0" pos="0 0 0" rgba="1.0 1.0 1.0 0.5" size="0.2 0.2 0.05" type="box"></geom>
-		</body>
+            <geom conaffinity="0" contype="0" pos="0 0 0" rgba="1.0 1.0 1.0 0.5" size="0.1 0.1 0.1" type="box"></geom>
+            <geom conaffinity="0" contype="0" pos="0 0 0" rgba="1.0 1.0 1.0 0.5" size="0.2 0.2 0.05" type="box"></geom>
+        </body>
         <body name="cylinder" pos="0.1 0.1 0.2">
             <geom mass="1" size="0.15 0.15" type="cylinder"/>
             <joint axis="1 0 0" name="cylinder:slidex" type="slide"/>
@@ -42,6 +42,8 @@ MODEL_XML = """
     <actuator>
         <motor gear="2000.0" joint="slide0"/>
         <motor gear="2000.0" joint="slide1"/>
+        <motor gear="2000.0" joint="slide2"/>
+        
     </actuator>
 </mujoco>
 """
@@ -51,8 +53,9 @@ sim = MjSim(model)
 viewer = MjViewer(sim)
 t = 0
 while True:
-    sim.data.ctrl[0] = math.cos(t / 10.) * 0.01
-    sim.data.ctrl[1] = math.sin(t / 10.) * 0.01
+    sim.data.ctrl[0] = math.cos(t / 10.) * 0.0
+    sim.data.ctrl[1] = math.sin(t / 10.) * 0.0
+    sim.data.ctrl[2] = 1.0*9.81/2000 + math.sin(t / 10.) * 0.01
     t += 1
     sim.step()
     viewer.render()

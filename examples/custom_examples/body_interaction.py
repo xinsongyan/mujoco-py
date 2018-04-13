@@ -40,9 +40,9 @@ MODEL_XML = """
         </body>
     </worldbody>
     <actuator>
-        <motor gear="2000.0" joint="slide0"/>
-        <motor gear="2000.0" joint="slide1"/>
-        <motor gear="2000.0" joint="slide2"/>
+        <motor gear="1.0" joint="slide0"/>
+        <motor gear="1.0" joint="slide1"/>
+        <motor gear="1.0" joint="slide2"/>
         
     </actuator>
 </mujoco>
@@ -53,9 +53,9 @@ sim = MjSim(model)
 viewer = MjViewer(sim)
 t = 0
 while True:
-    sim.data.ctrl[0] = math.cos(t / 10.) * 0.0
-    sim.data.ctrl[1] = math.sin(t / 10.) * 0.0
-    sim.data.ctrl[2] = 1.0*9.81/2000 + math.sin(t / 10.) * 0.01
+    sim.data.ctrl[0] = math.cos(t / 10.) * 0.01
+    sim.data.ctrl[1] = math.sin(t / 10.) * 0.01
+    sim.data.ctrl[2] = 1.0*9.81
     t += 1
     sim.step()
     viewer.render()

@@ -19,7 +19,7 @@ MODEL_XML = """
         <body name="robot" pos="0 0 1.2">
             <joint axis="1 0 0" damping="0.1" name="slide0" pos="0 0 0" type="slide"/>
             <joint axis="0 1 0" damping="0.1" name="slide1" pos="0 0 0" type="slide"/>
-            <joint axis="0 0 1" damping="1" name="slide2" pos="0 0 0" type="slide"/>
+            <joint axis="0 0 1" damping="0.1" name="slide2" pos="0 0 0" type="slide"/>
             <geom mass="1.0" pos="0 0 0" rgba="1 0 0 1" size="0.15" type="sphere"/>
             <camera euler="0 0 0" fovy="40" name="rgb" pos="0 0 2.5"></camera>
         </body>
@@ -43,7 +43,8 @@ MODEL_XML = """
         <motor gear="1.0" joint="slide0"/>
         <motor gear="1.0" joint="slide1"/>
         <motor gear="1.0" joint="slide2"/>
-        
+        <motor gear="1.0" joint="cylinder:slidex"/>
+        <motor gear="1.0" joint="cylinder:slidey"/>
     </actuator>
 </mujoco>
 """
@@ -53,9 +54,13 @@ sim = MjSim(model)
 viewer = MjViewer(sim)
 t = 0
 while True:
-    sim.data.ctrl[0] = math.cos(t / 10.) * 0.01
-    sim.data.ctrl[1] = math.sin(t / 10.) * 0.01
+    sim.data.ctrl[0] = math.cos(t / 10.) * 1
+    sim.data.ctrl[1] = math.sin(t / 10.) * 1
     sim.data.ctrl[2] = 1.0*9.81
+
+    sim.data.ctrl[3] = math.cos(t / 10.) * 1
+    sim.data.ctrl[4] = math.sin(t / 10.) * 1
+
     t += 1
     sim.step()
     viewer.render()

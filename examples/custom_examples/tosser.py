@@ -6,13 +6,14 @@ from mujoco_py import load_model_from_path, MjSim, MjViewer
 import os
 import numpy as np
 
-np.set_printoptions(precision=5)
+np.set_printoptions(precision=3)
 def print_state(state):
     time, qpos, qvel, act, udd_state = state.time, state.qpos, state.qvel, state.act, state.udd_state
     print("t: %5.3f" %time)
     print("qpos: ", qpos)
     print("qvel: ", qvel)
-
+    print("tosser (slide,hinge): ", qpos[:2])
+    print("object (z,y,pitch): ", qpos[-3:])
 
 
 model = load_model_from_path("../../xmls/tosser.xml")

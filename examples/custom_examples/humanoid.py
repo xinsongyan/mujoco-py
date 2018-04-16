@@ -22,7 +22,8 @@ def print_state(state):
 def mass_center(model, sim):
     mass = np.expand_dims(model.body_mass, 1)
     xpos = sim.data.xipos
-    return (np.sum(mass * xpos, 0) / np.sum(mass))
+    com_pos = (np.sum(mass * xpos, 0) / np.sum(mass))
+    return com_pos
 
 
 model = load_model_from_path("../../xmls/humanoid.xml")
